@@ -36,5 +36,5 @@ test("renders default image when image is not defined", ()=>{
     }} />);
     const image = screen.getByRole('img');
     expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute('alt', './stranger_things.png')
+    expect(image).toHaveAttribute('alt', 'https://i.ibb.co/2FsfXqM/stranger-things.png');
 });
