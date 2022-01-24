@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import Show from './../Show';
 
 test('renders without errors', ()=>{
-    render(<Show show={{
+    render(<Show selectedSeason={0} show={{
         name: 'test',
         summary: 'testSummary',
         seasons: [{
