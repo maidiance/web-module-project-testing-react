@@ -39,6 +39,7 @@ test('renders Show component when the button is clicked ', async()=>{
 });
 
 test('renders show season options matching your data when the button is clicked', async()=>{
+    const mockDisplayFunc = jest.fn();
     fetchShow.mockResolvedValueOnce({
         name: 'testData',
         image: null,
@@ -57,9 +58,10 @@ test('renders show season options matching your data when the button is clicked'
             episodes: []
         }]
     });
-    render(<Display />);
+    render(<Display displayFunc={mockDisplayFunc}/>);
     const button = screen.getByRole('button');
     userEvent.click(button);
     const selectOptions = await screen.findAllByTestId('season-option');
     expect(selectOptions).toHaveLength(3);
+    expect(mockDisplayFunc).toHaveBeenCalled();
 });
