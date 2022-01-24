@@ -20,6 +20,21 @@ test("renders the summary test passed as prop", ()=>{
     }} />);
     const summary = screen.queryByText(/testSummary/i);
     expect(summary).toBeInTheDocument();
+    expect(summary).toHaveTextContent(/testSummary/i);
+    expect(summary).toBeTruthy();
 });
 
-test("renders default image when image is not defined", ()=>{});
+test("renders default image when image is not defined", ()=>{
+    render(<Episode episode={{
+        id: 1,
+        image: null,
+        name: 'testName',
+        season: 1,
+        number: 1,
+        summary: 'testSummary',
+        runtime: 1
+    }} />);
+    const image = screen.getByRole('img');
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('alt', './stranger_things.png')
+});
