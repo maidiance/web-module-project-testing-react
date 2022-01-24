@@ -90,9 +90,25 @@ test('component renders when no seasons are selected and when rerenders with a s
             episodes: []
         }]
     }} />);
-    const selection = screen.getByRole('combobox');
-    let episodes = screen.queryAllByTestId('episodes-container');
-    expect(episodes).toHaveLength(0);
+    let episodeContainer = screen.queryByTestId('episodes-container');
+    expect(episodeContainer).not.toBeInTheDocument();
     // rerender
-
+    render(<Show selectedSeason={0} show={{
+        name: 'test',
+        summary: 'testSummary',
+        seasons: [{
+            id: 1,
+            name: 'testSeason',
+            episodes: [{
+                id: 1,
+                name: 'testEpisode',
+                season: 'testSeason',
+                number: 1,
+                summary: 'testSummary',
+                runtime: 1
+            }]
+        }]
+    }} />);
+    episodeContainer = screen.queryByTestId('episodes-container');
+    expect(episodeContainer).toBeInTheDocument();
 });
