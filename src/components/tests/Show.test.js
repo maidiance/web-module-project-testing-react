@@ -90,5 +90,9 @@ test('component renders when no seasons are selected and when rerenders with a s
             episodes: []
         }]
     }} />);
-    // let episodes = screen.queryAll
+    const selection = screen.getByRole('combobox');
+    let episodes = screen.queryAllByTestId('episodes-container');
+    expect(episodes).toHaveLength(0);
+    // rerender
+
 });
