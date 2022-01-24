@@ -15,9 +15,22 @@ test('renders without errors', ()=>{
             episodes: []
         }]
     }} />);
+    render(<Show selectedSeason={'none'} show={{
+        name: 'test',
+        summary: 'testSummary',
+        seasons: [{
+            id: 1,
+            name: 'testSeason',
+            episodes: []
+        }]
+    }} />);
 });
 
-test('renders Loading component when prop show is null', () => {});
+test('renders Loading component when prop show is null', () => {
+    render(<Show selectedSeason={'none'} show={null} />);
+    const loading = screen.queryByTestId("loading-container");
+    expect(loading).toBeInTheDocument();
+});
 
 
 test('renders same number of options seasons are passed in', ()=>{});
