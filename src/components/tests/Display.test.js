@@ -12,10 +12,33 @@ test('renders without errors with no props', ()=>{
 });
 
 test('renders Show component when the button is clicked ', async()=>{
-    
+    fetchShow.mockResolvedValueOnce({
+        name: 'testData',
+        image: null,
+        summary: 'testSummary',
+        seasons: [{
+            id: 1,
+            name: 'testSeason1',
+            episodes: []
+            }, {
+            id: 2,
+            name: 'testSeason2',
+            episodes: []
+            }, {
+            id: 3,
+            name: 'testSeason3',
+            episodes: []
+        }]
+    });
+    render(<Display />);
+    const button = screen.getByRole('button');
+    userEvent.click(button);
+    // check if Show component exists
+    const show = await screen.findByTestId('show-container');
+    expect(show).toBeInTheDocument();
 });
 
-test('renders show season options matching your data when the button is clicked', ()=>{
+test('renders show season options matching your data when the button is clicked', async()=>{
     fetchShow.mockResolvedValueOnce({
         name: 'testData',
         image: null,
