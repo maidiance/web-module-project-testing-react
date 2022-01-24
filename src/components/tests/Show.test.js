@@ -39,7 +39,7 @@ test('renders same number of options seasons are passed in', ()=>{
         summary: 'testSummary',
         seasons: [{
             id: 1,
-            name: 'testSeason',
+            name: 'testSeason1',
             episodes: []
         }, {
             id: 2,
@@ -55,6 +55,27 @@ test('renders same number of options seasons are passed in', ()=>{
     expect(selectOptions).toHaveLength(3);
 });
 
-test('handleSelect is called when an season is selected', () => {});
+test('handleSelect is called when an season is selected', () => {
+    render(<Show selectedSeason={'none'} show={{
+        name: 'test',
+        summary: 'testSummary',
+        seasons: [{
+            id: 1,
+            name: 'testSeason1',
+            episodes: []
+        }, {
+            id: 2,
+            name: 'testSeason2',
+            episodes: []
+        }, {
+            id: 3,
+            name: 'testSeason3',
+            episodes: []
+        }]
+    }} />);
+    const selection = screen.getByRole('combobox');
+    userEvent.selectOptions(selection, ['testSeason1']);
+    expect(screen.getByRole('option', {name: 'testSeason1'}).selected).toBe(true);
+});
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {});
