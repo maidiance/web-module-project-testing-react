@@ -12,8 +12,12 @@ test('renders without errors with no props', ()=>{
 });
 
 test('renders Show component when the button is clicked ', async()=>{
+    
+});
+
+test('renders show season options matching your data when the button is clicked', ()=>{
     fetchShow.mockResolvedValueOnce({
-        data: [{name: 'testData',
+        name: 'testData',
         image: null,
         summary: 'testSummary',
         seasons: [{
@@ -28,14 +32,11 @@ test('renders Show component when the button is clicked ', async()=>{
             id: 3,
             name: 'testSeason3',
             episodes: []
-            }]
         }]
     });
-    render(<Display displayFunc={true}/>);
+    render(<Display />);
     const button = screen.getByRole('button');
     userEvent.click(button);
-    const selectOptions = await screen.queryAllByTestId('season-option');
+    const selectOptions = await screen.findAllByTestId('season-option');
     expect(selectOptions).toHaveLength(3);
 });
-
-test('renders show season options matching your data when the button is clicked', ()=>{});
